@@ -1,0 +1,72 @@
+---
+title: "Ass.1 last"
+author: "Andrea lovisolo 19205880"
+date: "11 ottobre 2019"
+output: pdf_document
+---
+
+```{r, echo=FALSE}
+
+EurostatCrime2017 = read.csv(file= "EurostatCrime2017.csv",header= TRUE, sep=",",row.names=1)
+
+```
+
+```{r, 1}
+dim(EurostatCrime2017)
+str(EurostatCrime2017)
+```
+
+```{r,2}
+sum = rowSums(EurostatCrime2017[,-c(1, 2, 3, 4, 5, 6, 11)], na.rm = TRUE)
+EurostatCrime2017 = cbind(EurostatCrime2017, All_Theft = sum)
+```
+
+```{r,33}
+EurostatCrime2017 = EurostatCrime2017[,-c(7,8,9,10)]
+
+```
+
+ 
+```{r,4}
+MissV <- EurostatCrime2017[rowSums(is.na(EurostatCrime2017)) > 0,]
+```
+ 
+```{r,5}
+EurostatCrime2017 = na.omit(EurostatCrime2017)
+
+```
+ 
+```{r,6}
+str(EurostatCrime2017) 
+
+```
+
+###TASK 2 ANALYSIS
+
+```{r,7}
+ 
+c= EurostatCrime2017[5,] 
+c = unlist(c)
+sort(c, decreasing = TRUE)[1:3]
+
+```
+
+
+```{r,8}
+b = rowSums(EurostatCrime2017, na.rm = TRUE)
+which.max(b)
+```
+
+
+###Task 3 Creativity
+
+```{r,9}
+p= EurostatCrime2017[,2]/EurostatCrime2017[,1]
+barplot( p ,col = "Blue", xlab= "Country", axisnames = TRUE)
+which.max(p)
+rownames(EurostatCrime2017[13,])
+
+#Aim of the grapichs is to underline the outliar value comparing murders committed and attempted murders in a part of the European country. We can easly reconize the outliar in the 13th position which is occupied by Luxembourg. The Non-standardized value of Luxemburg has no meaning by itself but is a clear definition of the hight quality work of the national Police in tracing and foiling possible murders.
+
+#Conclusion: Knowing the added value that Luxembourg holds in prosecuting possible killers it is possible to activate new research to define through their example good practices to spread across the Europe.
+```
